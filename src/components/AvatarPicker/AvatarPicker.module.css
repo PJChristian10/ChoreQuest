@@ -1,0 +1,37 @@
+.avatarGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+
+.avatarButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  min-height: 60px;
+  border-radius: 12px;
+  border: 2px solid var(--color-muted);
+  background-color: var(--color-card);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+  touch-action: manipulation;
+}
+
+.avatarButton:hover:not(.avatarSelected) {
+  border-color: var(--color-gold);
+  background-color: rgba(240, 192, 64, 0.1);
+}
+
+.avatarSelected {
+  border-color: var(--color-gold);
+  background-color: rgba(240, 192, 64, 0.2);
+  box-shadow: 0 0 0 2px var(--color-gold);
+}
+
+.avatarEmoji {
+  font-size: 1.8rem;
+  line-height: 1;
+  display: block;
+}

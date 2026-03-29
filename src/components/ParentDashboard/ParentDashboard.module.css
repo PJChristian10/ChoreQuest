@@ -1,0 +1,86 @@
+.dashboard {
+  height: 100vh;
+  background: var(--color-bg, #1B2A4A);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: var(--color-card, #243558);
+  border-bottom: 2px solid rgba(240, 192, 64, 0.2);
+}
+
+.title {
+  font-family: var(--font-display, "Cinzel Decorative", serif);
+  color: var(--color-gold, #F0C040);
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.exitButton {
+  min-height: var(--touch-min, 60px);
+  padding: 0.5rem 1.25rem;
+  background: var(--color-danger, #E84A4A);
+  border: none;
+  border-radius: 0.5rem;
+  color: #fff;
+  font-family: var(--font-body, "Nunito", sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.tabBar {
+  display: flex;
+  overflow-x: auto;
+  background: var(--color-card, #243558);
+  padding: 0 1rem;
+  gap: 0.25rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.tabButton {
+  min-height: var(--touch-min, 60px);
+  padding: 0.75rem 1.25rem;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--color-muted, #8A9BB5);
+  font-family: var(--font-body, "Nunito", sans-serif);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.tabButton[aria-selected="true"] {
+  color: var(--color-gold, #F0C040);
+  border-bottom-color: var(--color-gold, #F0C040);
+}
+
+.badge {
+  background: var(--color-amber, #E8734A);
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.1em 0.5em;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.tabPanel {
+  flex: 1;
+  min-height: 0;   /* allows flex child to shrink and scroll */
+  overflow-y: auto;
+  /* gold scrollbar tint where supported */
+  scrollbar-color: rgba(240, 192, 64, 0.4) transparent;
+  scrollbar-width: thin;
+}

@@ -1,0 +1,45 @@
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.claimButton {
+  width: 100%;
+  background-color: #E8734A;
+  color: #F5F0E8;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  padding: var(--space-2) var(--space-4);
+  transition: opacity 0.15s ease;
+}
+
+.claimButton:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.claimButton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.statusIndicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.awaitingText {
+  color: #E8734A;
+}
+
+.completeText {
+  color: #7EC84A;
+}

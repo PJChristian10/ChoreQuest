@@ -1,0 +1,56 @@
+.numpad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.digitButton,
+.backspaceButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  min-height: 80px;
+  border-radius: 12px;
+  border: 2px solid var(--color-muted);
+  background-color: var(--color-card);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.digitButton:hover:not(:disabled),
+.backspaceButton:hover:not(:disabled) {
+  background-color: var(--color-gold);
+  color: var(--color-bg);
+  border-color: var(--color-gold);
+}
+
+.digitButton:active:not(:disabled),
+.backspaceButton:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.digitButton:disabled,
+.backspaceButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.backspaceButton {
+  font-size: 1.2rem;
+}
+
+.empty {
+  display: block;
+  min-width: 80px;
+  min-height: 80px;
+}

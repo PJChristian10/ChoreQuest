@@ -1,0 +1,101 @@
+.container {
+  padding: 1.5rem;
+}
+
+.heading {
+  font-family: var(--font-display, "Cinzel Decorative", serif);
+  color: var(--color-gold, #F0C040);
+  font-size: 1.25rem;
+  margin: 0 0 1.5rem;
+}
+
+.emptyState {
+  color: var(--color-muted, #8A9BB5);
+  font-family: var(--font-body, "Nunito", sans-serif);
+  text-align: center;
+  padding: 2rem;
+}
+
+.approvalList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.approvalItem {
+  background: var(--color-card, #243558);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.itemHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.playerName {
+  font-family: var(--font-body, "Nunito", sans-serif);
+  color: var(--color-gold, #F0C040);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.questTitle {
+  font-family: var(--font-body, "Nunito", sans-serif);
+  color: var(--color-text, #F5F0E8);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.rewards {
+  display: flex;
+  gap: 1rem;
+}
+
+.rewardBadge {
+  font-family: var(--font-body, "Nunito", sans-serif);
+  color: var(--color-muted, #8A9BB5);
+  font-size: 0.9rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.approveButton {
+  min-height: var(--touch-min, 60px);
+  min-width: var(--touch-min, 60px);
+  padding: 0.75rem 1.5rem;
+  background: var(--color-green, #7EC84A);
+  border: none;
+  border-radius: 0.5rem;
+  color: #fff;
+  font-family: var(--font-body, "Nunito", sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  flex: 1;
+}
+
+.denyButton {
+  min-height: var(--touch-min, 60px);
+  min-width: var(--touch-min, 60px);
+  padding: 0.75rem 1.5rem;
+  background: var(--color-danger, #E84A4A);
+  border: none;
+  border-radius: 0.5rem;
+  color: #fff;
+  font-family: var(--font-body, "Nunito", sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  flex: 1;
+}

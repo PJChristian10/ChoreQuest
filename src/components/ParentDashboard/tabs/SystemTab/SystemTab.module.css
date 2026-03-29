@@ -1,0 +1,433 @@
+.tab {
+  padding: 2rem;
+  max-width: 640px;
+}
+
+.heading {
+  font-family: var(--font-display, "Cinzel Decorative", serif);
+  color: var(--color-gold, #F0C040);
+  font-size: 1.25rem;
+  margin: 0 0 2rem;
+}
+
+/* Backup zone card */
+
+.backupZone {
+  background: rgba(240, 192, 64, 0.06);
+  border: 1.5px solid rgba(240, 192, 64, 0.3);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.backupHeading {
+  font-family: var(--font-body, "Nunito", sans-serif);
+  color: var(--color-gold, #F0C040);
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.backupDesc {
+  font-family: var(--font-body, "Nunito", sans-serif);
+  color: var(--color-muted, #8A9BB5);
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.backupActions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.exportButton {
+  min-height: var(--touch-min, 60px);
+  padding: 0.75rem 1.5rem;
+  background: var(--color-card, #243558);
+  border: 1.5px solid rgba(240, 192, 64, 0.5);
+  border-radius: 0.5rem;
+  color: var(--color-gold, #F0C040);
+  font-family: var(--font-body, "Nunito", sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.exportButton:hover {
+  border-color: var(--color-gold, #F0C040);
+  background: rgba(240, 192, 64, 0.1);
+}
+
+.importButton {
+  min-height: var(--touch-min, 60px);
+  padding: 0.75rem 1.5rem;
+  background: var(--color-card, #243558);
+  border: 1.5px solid rgba(138, 155, 181, 0.4);
+  border-radius: 0.5rem;
+  color: var(--color-text, #F5F0E8);
+  font-family: var(--font-body, "Nunito", sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.importButton:hover {
+  border-color: rgba(138, 155, 181, 0.8);
+  background: rgba(138, 155, 181, 0.08);
+}
+
+.fileInput {
+  display: none;
+}
+
+.importError {
+  font-family: var(--font-body, "Nunito", sans-serif);
+  color: #E24B4A;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.storageWarning {
+  font-family: var(--font-body, "Nunito", sans-serif);
+  color: var(--color-gold, #F0C040);
+  font-size: 0.875rem;
+  margin: 0;
+  line-height: 1.5;
+  background: rgba(240, 192, 64, 0.08);
+  border-radius: var(--radius-sm, 6px);
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+}
+
+/* Sync zone card */
+
+.syncZone {
+  background: rgba(126, 200, 74, 0.06);
+  border: 1.5px solid rgba(126, 200, 74, 0.3);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.syncHeading {
+  font-family: var(--font-body, "Nunito", sans-serif);
+  color: var(--color-green, #7EC84A);
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.syncDesc {
+  font-family: var(--font-body, "Nunito", sans-serif);
+  color: var(--color-muted, #8A9BB5);
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.syncWarning {
+  font-family: var(--font-body, "Nunito", sans-serif);
+  color: var(--color-gold, #F0C040);
+  font-size: 0.875rem;
+  margin: 0;
+  line-height: 1.5;
+  background: rgba(240, 192, 64, 0.08);
+  border-radius: var(--radius-sm, 6px);
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+}
+
+.syncButton {
+  align-self: flex-start;
+  min-height: var(--touch-min, 60px);
+  padding: 0.75rem 1.5rem;
+  background: var(--color-card, #243558);
+  border: 1.5px solid rgba(126, 200, 74, 0.5);
+  border-radius: 0.5rem;
+  color: var(--color-green, #7EC84A);
+  font-family: var(--font-body, "Nunito", sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.syncButton:hover {
+  border-color: var(--color-green, #7EC84A);
+  background: rgba(126, 200, 74, 0.1);
+}
+
+.syncCodeBox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 0.5rem);
+  background: var(--color-bg, #1B2A4A);
+  border-radius: var(--radius-sm, 6px);
+  padding: var(--space-3, 0.75rem);
+}
+
+.syncCodeLabel {
+  font-family: var(--font-body, "Nunito", sans-serif);
+  color: var(--color-muted, #8A9BB5);
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.syncCodeText {
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--color-text, #F5F0E8);
+  word-break: break-all;
+  line-height: 1.5;
+}
+
+.syncCopyButton {
+  align-self: flex-start;
+  min-height: var(--touch-min, 60px);
+  padding: 0.5rem 1.25rem;
+  background: var(--color-green, #7EC84A);
+  border: none;
+  border-radius: 0.5rem;
+  color: #1B2A4A;
+  font-family: var(--font-body, "Nunito", sans-serif);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.syncCopyButton:hover {
+  background: #6ab33e;
+}
+
+.syncError {
+  font-family: var(--font-body, "Nunito", sans-serif);
+  color: #E24B4A;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Danger zone card */
+
+.dangerZone {
+  background: rgba(226, 75, 74, 0.08);
+  border: 1.5px solid rgba(226, 75, 74, 0.4);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.dangerHeading {
+  font-family: var(--font-body, "Nunito", sans-serif);
+  color: #E24B4A;
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.dangerDesc {
+  font-family: var(--font-body, "Nunito", sans-serif);
+  color: var(--color-text-muted, #8A9BB5);
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.resetButton {
+  align-self: flex-start;
+  min-height: var(--touch-min, 60px);
+  padding: 0.75rem 1.5rem;
+  background: #E24B4A;
+  border: none;
+  border-radius: 0.5rem;
+  color: #fff;
+  font-family: var(--font-body, "Nunito", sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.resetButton:hover {
+  background: #c93837;
+}
+
+/* Modal overlay */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: var(--color-card, #243558);
+  border: 2px solid rgba(226, 75, 74, 0.5);
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 480px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.modalTitle {
+  font-family: var(--font-display, "Cinzel Decorative", serif);
+  color: #E24B4A;
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.modalWarning {
+  font-family: var(--font-body, "Nunito", sans-serif);
+  color: var(--color-text, #F5F0E8);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.confirmLabel {
+  font-family: var(--font-body, "Nunito", sans-serif);
+  color: var(--color-text-muted, #8A9BB5);
+  font-size: 0.9rem;
+}
+
+.confirmLabel strong {
+  color: var(--color-text, #F5F0E8);
+  letter-spacing: 0.05em;
+}
+
+.confirmInput {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.75rem 1rem;
+  background: var(--color-bg, #1B2A4A);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.5rem;
+  color: var(--color-text, #F5F0E8);
+  font-family: var(--font-body, "Nunito", sans-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-align: center;
+  outline: none;
+}
+
+.confirmInput:focus {
+  border-color: #E24B4A;
+}
+
+.modalActions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+.cancelButton {
+  min-height: var(--touch-min, 60px);
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  color: var(--color-text, #F5F0E8);
+  font-family: var(--font-body, "Nunito", sans-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.cancelButton:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.confirmButton {
+  min-height: var(--touch-min, 60px);
+  padding: 0.75rem 1.5rem;
+  background: #E24B4A;
+  border: none;
+  border-radius: 0.5rem;
+  color: #fff;
+  font-family: var(--font-body, "Nunito", sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+}
+
+.confirmButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.confirmButton:not(:disabled):hover {
+  background: #c93837;
+}
+
+/* Import confirmation modal — amber/warning variant */
+
+.importModal {
+  background: var(--color-card, #243558);
+  border: 2px solid rgba(240, 192, 64, 0.5);
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 480px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.importModalTitle {
+  font-family: var(--font-display, "Cinzel Decorative", serif);
+  color: var(--color-gold, #F0C040);
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.importMeta {
+  font-family: var(--font-body, "Nunito", sans-serif);
+  color: var(--color-muted, #8A9BB5);
+  font-size: 0.9rem;
+  margin: 0;
+  background: rgba(240, 192, 64, 0.07);
+  border-radius: var(--radius-sm, 6px);
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+}
+
+.importMeta strong {
+  color: var(--color-text, #F5F0E8);
+}
+
+.importConfirmButton {
+  min-height: var(--touch-min, 60px);
+  padding: 0.75rem 1.5rem;
+  background: var(--color-amber, #E8734A);
+  border: none;
+  border-radius: 0.5rem;
+  color: #fff;
+  font-family: var(--font-body, "Nunito", sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.importConfirmButton:hover {
+  background: #cf5f38;
+}

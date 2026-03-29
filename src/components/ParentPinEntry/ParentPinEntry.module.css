@@ -1,0 +1,46 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.panel {
+  background: var(--color-card, #243558);
+  border-radius: 1rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  min-width: 320px;
+}
+
+.heading {
+  font-family: var(--font-display, "Cinzel Decorative", serif);
+  color: var(--color-gold, #F0C040);
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.statusMessage {
+  color: var(--color-muted, #8A9BB5);
+  font-family: var(--font-body, "Nunito", sans-serif);
+  margin: 0;
+}
+
+.cancelButton {
+  min-height: var(--touch-min, 60px);
+  min-width: var(--touch-min, 60px);
+  padding: 0.75rem 2rem;
+  background: transparent;
+  border: 2px solid var(--color-muted, #8A9BB5);
+  border-radius: 0.5rem;
+  color: var(--color-text, #F5F0E8);
+  font-family: var(--font-body, "Nunito", sans-serif);
+  font-size: 1rem;
+  cursor: pointer;
+}

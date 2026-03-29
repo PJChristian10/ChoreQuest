@@ -1,0 +1,52 @@
+/**
+ * ChoreQuest Design Tokens
+ *
+ * Color palette, typography, spacing, and touch-target constants.
+ * Import this module in components that need typed token references,
+ * or reference the custom properties directly via :root in global.css.
+ */
+
+.tokens {
+  /* ── Colors ──────────────────────────────────────────────── */
+  --color-bg:       #1B2A4A;  /* Navy — page background          */
+  --color-surface:  #243558;  /* Card/panel surface              */
+  --color-gold:     #F0C040;  /* Gold — accent, titles, badges   */
+  --color-amber:    #E8734A;  /* Amber — primary action buttons  */
+  --color-green:    #7EC84A;  /* Green — success / complete      */
+  --color-text:     #F5F0E8;  /* Warm off-white — body text      */
+  --color-muted:    #8A9BB5;  /* Muted — metadata, labels        */
+
+  /* ── Typography ─────────────────────────────────────────── */
+  --font-display: "Cinzel Decorative", serif;   /* titles, ranks, quest names */
+  --font-body:    "Nunito", sans-serif;          /* body, labels, buttons      */
+
+  --text-xs:   0.75rem;   /* 12px */
+  --text-sm:   0.875rem;  /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg:   1.125rem;  /* 18px */
+  --text-xl:   1.25rem;   /* 20px */
+  --text-2xl:  1.5rem;    /* 24px */
+  --text-3xl:  1.875rem;  /* 30px */
+
+  /* ── Spacing ─────────────────────────────────────────────── */
+  --space-1:  0.25rem;   /* 4px  */
+  --space-2:  0.5rem;    /* 8px  */
+  --space-3:  0.75rem;   /* 12px */
+  --space-4:  1rem;      /* 16px */
+  --space-5:  1.25rem;   /* 20px */
+  --space-6:  1.5rem;    /* 24px */
+  --space-8:  2rem;      /* 32px */
+  --space-10: 2.5rem;    /* 40px */
+
+  /* ── Border radius ───────────────────────────────────────── */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  /* ── Touch targets (WCAG 2.5.5 / children ages 5–14) ─────── */
+  --touch-min: 60px;
+
+  /* ── Shadows ─────────────────────────────────────────────── */
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.35);
+  --shadow-raised: 0 8px 24px rgba(0, 0, 0, 0.5);
+}

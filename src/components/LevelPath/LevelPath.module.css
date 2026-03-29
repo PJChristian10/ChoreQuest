@@ -1,0 +1,247 @@
+/* ── Strip container ───────────────────────────────────────────────────── */
+
+.strip {
+  width: 100%;
+  background: var(--color-surface);
+  border-top: 1.5px solid rgba(240, 192, 64, 0.35);
+  padding: var(--space-3) var(--space-6) var(--space-4);
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+/* ── Track: 10 nodes spread evenly with connecting line ─────────────────── */
+
+.track {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+  /* Connecting dashed line behind nodes */
+  padding-bottom: var(--space-1);
+}
+
+.track::before {
+  content: "";
+  position: absolute;
+  /* Vertically centred on the node circles (~52px tall, centred in nodeWrapper) */
+  bottom: calc(var(--space-1) + 26px);
+  left: calc(50% / 10);
+  right: calc(50% / 10);
+  height: 2px;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(240, 192, 64, 0.4) 0px,
+    rgba(240, 192, 64, 0.4) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Node wrapper: full column (xp label, avatars, tap target, title) ───── */
+
+.nodeWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+/* ── XP label above node ────────────────────────────────────────────────── */
+
+.nodeXp {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--color-text);
+  line-height: 1;
+  min-height: 1em;
+}
+
+/* ── Avatar row (players currently at this level) ───────────────────────── */
+
+.avatarRow {
+  display: flex;
+  gap: 2px;
+  justify-content: center;
+  min-height: 1.4rem;
+}
+
+.avatarBubble {
+  font-size: 0.9rem;
+  line-height: 1;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6));
+}
+
+/* ── Tap target (invisible padding to hit var(--touch-min)) ─────────────── */
+
+.nodeTapTarget {
+  /* Invisible wrapper — 60px hit area */
+  min-width: var(--touch-min);
+  min-height: var(--touch-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.nodeTapTarget:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 4px;
+}
+
+/* ── Visible circle ─────────────────────────────────────────────────────── */
+
+.nodeCircle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-text);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Node state: completed ───────────────────────────────────────────────── */
+
+.node_completed .nodeCircle {
+  background: var(--color-gold);
+  color: var(--color-bg);
+  box-shadow: 0 2px 8px rgba(240, 192, 64, 0.4);
+}
+
+.node_completed:hover .nodeCircle,
+.node_completed:focus-visible .nodeCircle {
+  transform: scale(1.08);
+  box-shadow: 0 4px 14px rgba(240, 192, 64, 0.55);
+}
+
+/* ── Node state: active (pulsing gold ring) ──────────────────────────────── */
+
+.node_active .nodeCircle {
+  background: rgba(240, 192, 64, 0.2);
+  color: var(--color-gold);
+  border: 2px solid var(--color-gold);
+  box-shadow: 0 0 0 0 rgba(240, 192, 64, 0.6);
+}
+
+.nodeCircleActive {
+  animation: pulseRing 1.8s ease-out infinite;
+}
+
+@keyframes pulseRing {
+  0%   { box-shadow: 0 0 0 0 rgba(240, 192, 64, 0.6); }
+  60%  { box-shadow: 0 0 0 10px rgba(240, 192, 64, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(240, 192, 64, 0); }
+}
+
+.node_active:hover .nodeCircle,
+.node_active:focus-visible .nodeCircle {
+  transform: scale(1.08);
+}
+
+/* ── Node state: locked ──────────────────────────────────────────────────── */
+
+.node_locked .nodeCircle {
+  background: rgba(138, 155, 181, 0.12);
+  color: var(--color-muted);
+  border: 1.5px solid rgba(138, 155, 181, 0.25);
+  opacity: 0.6;
+}
+
+.node_locked:hover .nodeCircle,
+.node_locked:focus-visible .nodeCircle {
+  opacity: 0.8;
+  transform: scale(1.04);
+}
+
+/* ── Level title below node ──────────────────────────────────────────────── */
+
+.nodeTitle {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  color: var(--color-text);
+  text-align: center;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  width: 100%;
+  overflow-wrap: break-word;
+}
+
+/* ── Tooltip ────────────────────────────────────────────────────────────── */
+
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + var(--space-2));
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-bg);
+  border: 1.5px solid rgba(240, 192, 64, 0.5);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  white-space: nowrap;
+  box-shadow: var(--shadow-raised);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.tooltipTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  color: var(--color-gold);
+  font-weight: 700;
+}
+
+.tooltipXp {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+}
+
+.tooltipPerk {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--color-text);
+}
+
+/* ── Reduced motion ─────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .nodeCircleActive {
+    animation: none;
+    box-shadow: 0 0 0 3px rgba(240, 192, 64, 0.5);
+  }
+}
+
+/* ── Compact level path on shorter screens ──────────────────────────────── */
+@media (max-height: 900px) {
+  .strip { padding: var(--space-2) var(--space-4) var(--space-3); }
+  .nodeCircle { width: 42px; height: 42px; }
+  .nodeTapTarget { min-width: 44px; min-height: 44px; }
+}
+
+@media (max-height: 750px) {
+  .strip { padding: var(--space-1) var(--space-3) var(--space-2); }
+  .nodeCircle { width: 32px; height: 32px; font-size: var(--text-sm); }
+  .nodeTapTarget { min-width: 36px; min-height: 36px; }
+  .nodeTitle { font-size: 0.5rem; }
+  .nodeXp { font-size: 0.6rem; }
+}

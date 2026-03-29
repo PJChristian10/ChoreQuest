@@ -1,0 +1,58 @@
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-8px); }
+  40%       { transform: translateX(8px); }
+  60%       { transform: translateX(-6px); }
+  80%       { transform: translateX(6px); }
+}
+
+@keyframes successFlash {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+.pinDots {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px 0;
+}
+
+.pinDotsError {
+  animation: shake 0.5s ease-in-out;
+}
+
+.pinDotsSuccess {
+  animation: successFlash 0.4s ease-in-out;
+}
+
+.dotEmpty,
+.dotFilled {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.dotEmpty {
+  background-color: transparent;
+  border: 2px solid var(--color-muted);
+}
+
+.dotFilled {
+  background-color: var(--color-gold);
+  border: 2px solid var(--color-gold);
+}
+
+.pinDotsSuccess .dotFilled {
+  background-color: var(--color-green);
+  border-color: var(--color-green);
+}
+
+.pinDotsError .dotFilled {
+  background-color: var(--color-amber);
+  border-color: var(--color-amber);
+}

@@ -1,0 +1,106 @@
+/* Full-screen column — fixed height so the content area can scroll */
+.kioskHome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background: url(/aurora-bg.png) center / cover no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Scrollable content block — fills space above the bottom strips */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  /* min-height: 0 is required for a flex child to shrink and scroll */
+  min-height: 0;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--space-4) 0 var(--space-6);
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-surface) transparent;
+  /* Subtle dark vignette behind content so cards pop against the aurora */
+  background: none;
+}
+
+.content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: var(--color-surface);
+  border-radius: 3px;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--color-muted);
+  margin: 0 0 36px;
+  text-align: center;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.playerGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.parentButton {
+  margin-top: 32px;
+  min-height: var(--touch-min, 60px);
+  padding: 0 40px;
+  background: var(--color-card, #243558);
+  border: 1.5px solid rgba(240, 192, 64, 0.4);
+  border-radius: 10px;
+  color: var(--color-muted);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.parentButton:hover,
+.parentButton:focus-visible {
+  border-color: rgba(240, 192, 64, 0.85);
+  color: var(--color-gold);
+  background: rgba(240, 192, 64, 0.06);
+  outline: none;
+}
+
+/* ── Compact layout on shorter screens ──────────────────────────────────── */
+@media (max-height: 900px) {
+  .content { padding: var(--space-2) 0 var(--space-4); }
+  .heading { margin: 0 0 16px; font-size: 1.1rem; }
+  .parentButton { margin-top: 16px; }
+}
+
+@media (max-height: 750px) {
+  .content { padding: var(--space-1) 0 var(--space-2); }
+  .heading { margin: 0 0 8px; font-size: 0.95rem; }
+  .parentButton { margin-top: 8px; }
+}
+
+/* ── Stars & clouds hidden — aurora photo provides the atmosphere ────────── */
+
+.stars,
+.star,
+.cloud {
+  display: none;
+}

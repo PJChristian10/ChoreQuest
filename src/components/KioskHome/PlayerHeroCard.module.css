@@ -1,0 +1,141 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 28px 20px 24px;
+  background: var(--color-card, #243558);
+  border: 2px solid rgba(240, 192, 64, 0.3);
+  border-radius: 20px;
+  cursor: pointer;
+  min-height: 280px;
+  width: 220px;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.card:hover,
+.card:focus-visible {
+  border-color: rgba(240, 192, 64, 0.8);
+  transform: scale(1.03);
+  box-shadow: 0 8px 32px rgba(240, 192, 64, 0.25);
+  outline: none;
+}
+
+.card:active {
+  transform: scale(1.01);
+}
+
+.avatarEmoji {
+  font-size: 96px;
+  line-height: 1;
+  user-select: none;
+}
+
+.avatarFallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: var(--color-muted);
+  color: var(--color-bg);
+  font-size: 2.75rem;
+  font-weight: bold;
+  user-select: none;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.levelTitle {
+  font-size: 0.9rem;
+  color: var(--color-amber, #E8734A);
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.xpBarWrapper {
+  width: 100%;
+  height: 10px;
+  background: rgba(138, 155, 181, 0.25);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 2px;
+}
+
+.xpBarFill {
+  height: 100%;
+  background: var(--color-gold, #F0C040);
+  border-radius: 5px;
+  transition: width 0.4s ease;
+}
+
+.xpLabel {
+  font-size: 0.75rem;
+  color: var(--color-muted, #8A9BB5);
+  margin-top: -4px;
+}
+
+.coinRow {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-gold, #F0C040);
+}
+
+.streakRow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.95rem;
+}
+
+.onARoll {
+  font-size: 0.8rem;
+  color: var(--color-amber, #E8734A);
+  font-weight: 700;
+  background: rgba(232, 115, 74, 0.18);
+  border-radius: 8px;
+  padding: 2px 8px;
+}
+
+.weeklyCoins {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+  .xpBarFill {
+    transition: none;
+  }
+}
+
+/* ── Compact cards on shorter screens ───────────────────────────────────── */
+@media (max-height: 900px) {
+  .card { min-height: 220px; width: 190px; padding: 16px 16px 14px; gap: 8px; }
+  .avatarEmoji { font-size: 72px; }
+  .avatarFallback { width: 72px; height: 72px; font-size: 2rem; }
+}
+
+@media (max-height: 750px) {
+  .card { min-height: 180px; width: 165px; padding: 10px 12px 10px; gap: 6px; }
+  .avatarEmoji { font-size: 54px; }
+  .avatarFallback { width: 54px; height: 54px; font-size: 1.6rem; }
+  .name { font-size: 0.95rem; }
+  .levelTitle { font-size: 0.8rem; }
+}

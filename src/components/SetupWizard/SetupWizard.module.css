@@ -1,0 +1,326 @@
+/* Screen-reader only — visually hidden but accessible */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.wizard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  padding: 24px 16px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 440px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background-color: var(--color-card);
+  border-radius: 24px;
+  padding: 40px 32px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+}
+
+.welcomeHeading,
+.stepHeading {
+  font-family: var(--font-display);
+  color: var(--color-gold);
+  text-align: center;
+  margin: 0;
+}
+
+.welcomeHeading {
+  font-size: 2rem;
+}
+
+.stepHeading {
+  font-size: 1.5rem;
+}
+
+.welcomeSubtitle,
+.stepSubheading {
+  font-family: var(--font-body);
+  color: var(--color-muted);
+  text-align: center;
+  margin: 0;
+}
+
+.primaryButton {
+  padding: 16px 48px;
+  border-radius: 16px;
+  border: none;
+  background-color: var(--color-amber);
+  color: var(--color-bg);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  min-height: var(--touch-min);
+}
+
+.primaryButton:hover {
+  opacity: 0.9;
+}
+
+.backButton {
+  padding: 10px 24px;
+  border-radius: 12px;
+  border: 2px solid var(--color-muted);
+  background-color: transparent;
+  color: var(--color-muted);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  cursor: pointer;
+  min-height: var(--touch-min);
+}
+
+.nextButton {
+  padding: 10px 32px;
+  border-radius: 12px;
+  border: none;
+  background-color: var(--color-amber);
+  color: var(--color-bg);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: var(--touch-min);
+}
+
+.nextButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.skipButton {
+  padding: 10px 24px;
+  border-radius: 12px;
+  border: 2px solid var(--color-muted);
+  background-color: transparent;
+  color: var(--color-muted);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  cursor: pointer;
+  min-height: var(--touch-min);
+}
+
+.navRow {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  /* Always visible — sticks to the bottom of the scrollable card */
+  position: sticky;
+  bottom: 0;
+  background-color: var(--color-card);
+  padding-top: 16px;
+  margin-top: auto;
+}
+
+.formGroup {
+  width: 100%;
+}
+
+.textInput {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 2px solid var(--color-muted);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  box-sizing: border-box;
+  min-height: var(--touch-min);
+}
+
+.textInput:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+.addButton {
+  padding: 12px 32px;
+  border-radius: 12px;
+  border: none;
+  background-color: var(--color-green);
+  color: var(--color-bg);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: var(--touch-min);
+}
+
+.addButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.addedPlayerList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.addedPlayerItem {
+  padding: 8px 16px;
+  border-radius: 8px;
+  background-color: rgba(126, 200, 74, 0.15);
+  color: var(--color-green);
+  font-family: var(--font-body);
+  font-weight: 600;
+}
+
+.templateGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+
+.templateCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 10px;
+  border-radius: 12px;
+  border: 2px solid var(--color-muted);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+  text-align: center;
+  min-height: 70px;
+}
+
+.templateCard:hover {
+  border-color: var(--color-gold);
+}
+
+.templateSelected {
+  border-color: var(--color-gold);
+  background-color: rgba(240, 192, 64, 0.15);
+}
+
+.templateTitle {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.templateMeta {
+  font-size: 0.75rem;
+  color: var(--color-muted);
+}
+
+.errorMessage {
+  color: var(--color-amber);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  margin: 0;
+  text-align: center;
+}
+
+.promptText {
+  color: var(--color-muted);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  margin: 0;
+  text-align: center;
+}
+
+.pinDisplay {
+  width: 100%;
+  padding: 8px;
+  text-align: center;
+  border: 1px solid var(--color-muted);
+  border-radius: 8px;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+.optionalPin {
+  width: 100%;
+  border: 1px solid var(--color-muted);
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+
+.optionalPinSummary {
+  cursor: pointer;
+  color: var(--color-muted);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  padding: 4px 0;
+}
+
+.choiceGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+.choiceCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 24px 16px;
+  border-radius: 16px;
+  border: 2px solid var(--color-muted);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+  text-align: center;
+  min-height: 140px;
+}
+
+.choiceCard:hover {
+  border-color: var(--color-gold);
+  background-color: rgba(240, 192, 64, 0.08);
+}
+
+.choiceIcon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.choiceCardTitle {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-gold);
+}
+
+.choiceCardDesc {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  line-height: 1.4;
+}

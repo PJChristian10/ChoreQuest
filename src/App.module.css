@@ -1,0 +1,15 @@
+.saveFailedBanner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: #E24B4A;
+  color: #fff;
+  font-family: var(--font-body, "Nunito", sans-serif);
+  font-size: var(--text-sm, 0.875rem);
+  font-weight: 700;
+  text-align: center;
+  padding: var(--space-2, 0.5rem) var(--space-4, 1rem);
+  line-height: 1.4;
+}

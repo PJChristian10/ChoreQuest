@@ -1,0 +1,80 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.formGroup {
+  width: 100%;
+}
+
+.textInput {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 2px solid var(--color-muted, #8A9BB5);
+  background-color: var(--color-bg, #1B2A4A);
+  color: var(--color-text, #F5F0E8);
+  font-family: var(--font-body, "Nunito", sans-serif);
+  font-size: 1rem;
+  box-sizing: border-box;
+  min-height: var(--touch-min, 60px);
+}
+
+.textInput:focus {
+  outline: none;
+  border-color: var(--color-gold, #F0C040);
+}
+
+.optionalPin {
+  width: 100%;
+  border: 1px solid var(--color-muted, #8A9BB5);
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+
+.optionalPinSummary {
+  cursor: pointer;
+  color: var(--color-muted, #8A9BB5);
+  font-family: var(--font-body, "Nunito", sans-serif);
+  font-size: 0.9rem;
+  padding: 4px 0;
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.addButton {
+  min-height: var(--touch-min, 60px);
+  padding: 12px 32px;
+  border-radius: 12px;
+  border: none;
+  background-color: var(--color-green, #7EC84A);
+  color: var(--color-bg, #1B2A4A);
+  font-family: var(--font-body, "Nunito", sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  flex: 1;
+}
+
+.addButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.cancelButton {
+  min-height: var(--touch-min, 60px);
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: 2px solid var(--color-muted, #8A9BB5);
+  background-color: transparent;
+  color: var(--color-muted, #8A9BB5);
+  font-family: var(--font-body, "Nunito", sans-serif);
+  font-size: 1rem;
+  cursor: pointer;
+}

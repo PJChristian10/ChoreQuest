@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background -->
+  <rect width="512" height="512" rx="80" fill="#1B2A4A"/>
+
+  <!-- Outer ring -->
+  <circle cx="256" cy="256" r="210" fill="none" stroke="#F0C040" stroke-width="6" opacity="0.4"/>
+  <!-- Inner ring -->
+  <circle cx="256" cy="256" r="170" fill="none" stroke="#F0C040" stroke-width="3" opacity="0.25"/>
+
+  <!-- Shield body -->
+  <path d="M256 100 L356 150 L356 280 Q356 340 256 400 Q156 340 156 280 L156 150 Z"
+        fill="#243558" stroke="#F0C040" stroke-width="6"/>
+
+  <!-- Shield inner highlight -->
+  <path d="M256 130 L336 172 L336 278 Q336 326 256 374 Q176 326 176 278 L176 172 Z"
+        fill="none" stroke="#F0C040" stroke-width="2" opacity="0.3"/>
+
+  <!-- CQ monogram -->
+  <text x="256" y="295"
+        font-family="serif"
+        font-size="130"
+        font-weight="bold"
+        text-anchor="middle"
+        fill="url(#gold)"
+        letter-spacing="-4">CQ</text>
+
+  <!-- Star at top of shield -->
+  <polygon points="256,108 263,130 286,130 268,143 275,166 256,153 237,166 244,143 226,130 249,130"
+           fill="#F0C040"/>
+
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE680"/>
+      <stop offset="40%" stop-color="#F0C040"/>
+      <stop offset="100%" stop-color="#C8860A"/>
+    </linearGradient>
+  </defs>
+</svg>

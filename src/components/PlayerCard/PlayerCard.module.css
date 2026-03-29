@@ -1,0 +1,47 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 60px;
+  padding: 20px 16px;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  background-color: var(--color-card);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.1s ease;
+  width: 100%;
+  touch-action: manipulation;
+}
+
+.card:hover {
+  border-color: var(--color-gold);
+}
+
+.card:active {
+  transform: scale(0.97);
+}
+
+.avatar {
+  font-size: 3rem;
+  line-height: 1;
+  display: block;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: center;
+}
+
+.levelTitle {
+  font-size: 0.85rem;
+  color: var(--color-gold);
+  font-weight: 600;
+  text-align: center;
+}
