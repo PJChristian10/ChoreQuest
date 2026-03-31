@@ -21,7 +21,7 @@ function renderPendingApprovalsTab(
   onSessionExpired = vi.fn()
 ) {
   return render(
-    <GameProvider initialState={state}>
+    <GameProvider skipSync={true} initialState={state}>
       <PendingApprovalsTab onSessionExpired={onSessionExpired} />
     </GameProvider>
   );

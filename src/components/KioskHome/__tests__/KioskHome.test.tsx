@@ -26,7 +26,7 @@ function renderKioskHome(
 ) {
   const state = makeGameState({ players });
   return render(
-    <GameProvider initialState={state}>
+    <GameProvider skipSync={true} initialState={state}>
       <KioskHome onPlayerUnlocked={onPlayerUnlocked} onParentUnlocked={onParentUnlocked} />
     </GameProvider>
   );
@@ -95,7 +95,7 @@ describe("KioskHome", () => {
 
   it("renders no player cards when SEED_STATE has no players", () => {
     render(
-      <GameProvider initialState={SEED_STATE}>
+      <GameProvider skipSync={true} initialState={SEED_STATE}>
         <KioskHome onPlayerUnlocked={vi.fn()} onParentUnlocked={vi.fn()} />
       </GameProvider>
     );
@@ -208,7 +208,7 @@ describe("KioskHome", () => {
       parentConfig: makeParentConfig({ hashedPin: "$2b$10$testhash" }),
     });
     render(
-      <GameProvider initialState={state}>
+      <GameProvider skipSync={true} initialState={state}>
         <KioskHome onPlayerUnlocked={vi.fn()} onParentUnlocked={onParentUnlocked} />
       </GameProvider>
     );

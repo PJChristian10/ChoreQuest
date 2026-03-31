@@ -6,7 +6,8 @@
       "Bash(npx vitest:*)",
       "Bash(npm install:*)",
       "Bash(python -c \":*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(ipconfig)"
     ]
   }
 }

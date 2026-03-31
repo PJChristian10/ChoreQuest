@@ -10,8 +10,9 @@ import {
   type Dispatch,
 } from "react";
 import type { GameState, GameAction } from "./types.js";
-import { gameReducer, INITIAL_STATE } from "./reducer.js";
+import { gameReducer } from "./reducer.js";
 import { saveState, loadState } from "./localStorage.js";
+import { SEED_STATE } from "./seed.js";
 import {
   loadFromSupabase,
   syncAction,
@@ -34,18 +35,19 @@ const SaveStatusContext = createContext<boolean>(false);
 
 interface GameProviderProps {
   readonly children: ReactNode;
-  /** Inject a starting state — used in tests to avoid touching localStorage or Supabase. */
+  /** Inject a starting state — used in tests to bypass localStorage. */
   readonly initialState?: GameState;
+  /** Skip all Supabase and localStorage I/O — used in tests. Default false. */
+  readonly skipSync?: boolean;
 }
 
-export function GameProvider({ children, initialState }: GameProviderProps): React.JSX.Element {
-  // When initialState is provided (tests), skip all Supabase and localStorage I/O.
-  const skipSync = initialState !== undefined;
+export function GameProvider({ children, initialState, skipSync: skipSyncProp = false }: GameProviderProps): React.JSX.Element {
+  const skipSync = skipSyncProp;
 
   const startingState: GameState = (() => {
     if (initialState !== undefined) return initialState;
     const persisted = loadState();
-    return persisted ?? INITIAL_STATE;
+    return persisted ?? SEED_STATE;
   })();
 
   const [state, baseDispatch] = useReducer(gameReducer, startingState);
@@ -130,11 +132,12 @@ export function GameProvider({ children, initialState }: GameProviderProps): Rea
             local.quests.length > 0 ||
             local.parentConfig !== null;
           if (hasData) {
-            void pushMigration(local, uid).catch(() => {});
+            await pushMigration(local, uid);
           }
         }
-      } catch {
+      } catch (err) {
         // Supabase unreachable — the app continues on localStorage alone.
+        console.error("[ChoreQuest:GameContext] Supabase init/migration failed:", err);
       }
     })();
   }, [skipSync]); // eslint-disable-line react-hooks/exhaustive-deps

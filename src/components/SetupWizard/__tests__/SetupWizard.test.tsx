@@ -22,7 +22,7 @@ afterEach(() => {
 function renderWizard(onComplete = vi.fn(), onParentPortal = vi.fn()) {
   const emptyState = { ...SEED_STATE, players: [] };
   return render(
-    <GameProvider initialState={emptyState}>
+    <GameProvider skipSync={true} initialState={emptyState}>
       <SetupWizard onComplete={onComplete} onParentPortal={onParentPortal} />
     </GameProvider>
   );
@@ -47,7 +47,7 @@ function renderWizardWithCapture(onComplete = vi.fn(), onParentPortal = vi.fn())
   capturedRewardCount = 0;
   const emptyState = { ...SEED_STATE, players: [], quests: [], rewards: [] };
   return render(
-    <GameProvider initialState={emptyState}>
+    <GameProvider skipSync={true} initialState={emptyState}>
       <StateCapturer />
       <SetupWizard onComplete={onComplete} onParentPortal={onParentPortal} />
     </GameProvider>

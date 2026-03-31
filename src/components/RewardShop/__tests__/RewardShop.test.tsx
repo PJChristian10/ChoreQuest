@@ -20,7 +20,7 @@ describe("RewardShop", () => {
 
   it("renders RewardShopHeader", () => {
     render(
-      <GameProvider initialState={initialState}>
+      <GameProvider skipSync={true} initialState={initialState}>
         <RewardShop activePlayerId="p1" onBack={vi.fn()} />
       </GameProvider>
     );
@@ -30,7 +30,7 @@ describe("RewardShop", () => {
 
   it("renders a RewardCard for each active reward", () => {
     render(
-      <GameProvider initialState={initialState}>
+      <GameProvider skipSync={true} initialState={initialState}>
         <RewardShop activePlayerId="p1" onBack={vi.fn()} />
       </GameProvider>
     );
@@ -40,7 +40,7 @@ describe("RewardShop", () => {
 
   it("shows 'Can't Afford' state for rewards player can't afford", () => {
     render(
-      <GameProvider initialState={initialState}>
+      <GameProvider skipSync={true} initialState={initialState}>
         <RewardShop activePlayerId="p1" onBack={vi.fn()} />
       </GameProvider>
     );
@@ -49,7 +49,7 @@ describe("RewardShop", () => {
 
   it("tapping an affordable reward opens RedeemConfirmModal", () => {
     render(
-      <GameProvider initialState={initialState}>
+      <GameProvider skipSync={true} initialState={initialState}>
         <RewardShop activePlayerId="p1" onBack={vi.fn()} />
       </GameProvider>
     );
@@ -60,7 +60,7 @@ describe("RewardShop", () => {
 
   it("RedeemConfirmModal is not shown initially", () => {
     render(
-      <GameProvider initialState={initialState}>
+      <GameProvider skipSync={true} initialState={initialState}>
         <RewardShop activePlayerId="p1" onBack={vi.fn()} />
       </GameProvider>
     );
@@ -69,7 +69,7 @@ describe("RewardShop", () => {
 
   it("cancelling the modal closes it", () => {
     render(
-      <GameProvider initialState={initialState}>
+      <GameProvider skipSync={true} initialState={initialState}>
         <RewardShop activePlayerId="p1" onBack={vi.fn()} />
       </GameProvider>
     );
@@ -82,7 +82,7 @@ describe("RewardShop", () => {
   it("confirming the modal with correct PIN dispatches REDEEM_REWARD", async () => {
     const verifyPin = vi.fn().mockResolvedValue(true);
     render(
-      <GameProvider initialState={initialState}>
+      <GameProvider skipSync={true} initialState={initialState}>
         <RewardShop activePlayerId="p1" onBack={vi.fn()} verifyPin={verifyPin} />
       </GameProvider>
     );
@@ -102,7 +102,7 @@ describe("RewardShop", () => {
   it("after successful redemption shows success message", async () => {
     const verifyPin = vi.fn().mockResolvedValue(true);
     render(
-      <GameProvider initialState={initialState}>
+      <GameProvider skipSync={true} initialState={initialState}>
         <RewardShop activePlayerId="p1" onBack={vi.fn()} verifyPin={verifyPin} />
       </GameProvider>
     );
@@ -121,7 +121,7 @@ describe("RewardShop", () => {
 
   it("returns null when activePlayerId not found", () => {
     render(
-      <GameProvider initialState={initialState}>
+      <GameProvider skipSync={true} initialState={initialState}>
         <RewardShop activePlayerId="nonexistent" onBack={vi.fn()} />
       </GameProvider>
     );

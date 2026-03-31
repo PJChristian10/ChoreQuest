@@ -1,7 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GameProvider } from "./state/GameContext.js";
-import { loadState } from "./state/localStorage.js";
-import { SEED_STATE } from "./state/seed.js";
 import { QuestBoard } from "./components/QuestBoard/index.js";
 import { KioskHome } from "./components/KioskHome/KioskHome.js";
 import { SetupWizard } from "./components/SetupWizard/SetupWizard.js";
@@ -27,6 +25,14 @@ function AppContent() {
     return "kiosk";
   });
   const [activePlayerId, setActivePlayerId] = useState<string | null>(null);
+
+  // When Supabase loads family data into an otherwise-empty state (e.g. after
+  // a sync-code join on a new device), advance past the setup wizard.
+  useEffect(() => {
+    if (screen === "setup" && state.players.length > 0) {
+      setScreen("kiosk");
+    }
+  }, [state.players.length, screen]);
 
   // Inactivity timer — return to kiosk after 60s
   useInactivityTimer(60_000, () => {
@@ -119,11 +125,8 @@ function AppContent() {
 }
 
 export default function App() {
-  // loadState(): persisted state on refresh
-  // SEED_STATE: empty state — no players triggers the setup wizard
-  const initialState = loadState() ?? SEED_STATE;
   return (
-    <GameProvider initialState={initialState}>
+    <GameProvider>
       <AppContent />
     </GameProvider>
   );

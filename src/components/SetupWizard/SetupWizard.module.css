@@ -278,6 +278,48 @@
   padding: 4px 0;
 }
 
+.joinButton {
+  background: transparent;
+  border: none;
+  color: var(--color-muted);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 8px 16px;
+  text-decoration: underline;
+  min-height: var(--touch-min);
+}
+
+.joinButton:hover {
+  color: var(--color-text);
+}
+
+.syncCodeInput {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: 2px solid var(--color-muted);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: monospace, var(--font-body);
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-align: center;
+  text-transform: uppercase;
+  box-sizing: border-box;
+  min-height: var(--touch-min);
+}
+
+.syncCodeInput:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+.syncCodeInput:disabled {
+  opacity: 0.6;
+}
+
 .choiceGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

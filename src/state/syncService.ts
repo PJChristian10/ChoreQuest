@@ -59,7 +59,13 @@ export async function loadFromSupabase(familyId: string): Promise<GameState | nu
       client.from("parent_config").select("*").eq("family_id", familyId).maybeSingle(),
     ]);
 
-    if (e1 || e2 || e3 || e4 || e5 || e6) return null;
+    if (e1 || e2 || e3 || e4 || e5 || e6) {
+      console.error("[ChoreQuest:loadFromSupabase] Query error(s):", {
+        players: e1, quests: e2, claims: e3,
+        rewards: e4, redemptions: e5, parentConfig: e6,
+      });
+      return null;
+    }
 
     // If there are no rows at all, treat as first-run (no migration needed)
     const isEmpty =
@@ -77,7 +83,8 @@ export async function loadFromSupabase(familyId: string): Promise<GameState | nu
       parentConfig: configRow ? rowToParentConfig(configRow as ParentConfigRow) : null,
       parentSession: null,
     };
-  } catch {
+  } catch (err) {
+    console.error("[ChoreQuest:loadFromSupabase] Unexpected exception:", err);
     return null;
   }
 }
@@ -163,6 +170,23 @@ export async function syncAction(
       }
 
       // ── Reward mutations ──────────────────────────────────────────────────
+      case "ADD_QUESTS_BATCH": {
+        if (action.payload.quests.length > 0) {
+          await client.from("quests").insert(
+            action.payload.quests.map((q) => questToRow(q, familyId))
+          );
+        }
+        break;
+      }
+      case "ADD_REWARDS_BATCH": {
+        if (action.payload.rewards.length > 0) {
+          await client.from("rewards").insert(
+            action.payload.rewards.map((r) => rewardToRow(r, familyId))
+          );
+        }
+        break;
+      }
+
       case "ADD_REWARD": {
         await client.from("rewards").insert(rewardToRow(action.reward, familyId));
         break;
@@ -223,8 +247,9 @@ export async function syncAction(
       case "LOAD_STATE":
         break;
     }
-  } catch {
+  } catch (err) {
     // Sync failure is non-fatal; localStorage holds state until reconnect
+    console.error(`[ChoreQuest:syncAction] Failed to sync action "${action.type}":`, err);
   }
 }
 
@@ -243,7 +268,7 @@ export async function pushMigration(
   const client = getSupabaseClient();
   if (!client) return;
 
-  const ops: Promise<unknown>[] = [];
+  const ops: PromiseLike<unknown>[] = [];
 
   if (state.players.length > 0) {
     ops.push(
@@ -280,7 +305,12 @@ export async function pushMigration(
     );
   }
 
-  await Promise.all(ops);
+  try {
+    await Promise.all(ops);
+  } catch (err) {
+    console.error("[ChoreQuest:pushMigration] Migration failed:", err);
+    throw err; // re-throw so GameContext's outer try/catch can log it too
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -310,5 +340,9 @@ export function subscribeToFamily(
     .on("postgres_changes", filter("rewards"), onChange)
     .on("postgres_changes", filter("reward_redemptions"), onChange)
     .on("postgres_changes", filter("parent_config"), onChange)
-    .subscribe();
+    .subscribe((_, err) => {
+      if (err) {
+        console.error("[ChoreQuest:subscribeToFamily] Subscription error:", err);
+      }
+    });
 }

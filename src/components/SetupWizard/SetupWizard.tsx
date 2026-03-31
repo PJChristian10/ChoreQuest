@@ -18,6 +18,7 @@ import {
   instantiateSelectedQuests,
   instantiateSelectedRewards,
 } from "../../services/templateService.js";
+import { getSupabaseClient } from "../../lib/supabaseClient.js";
 import styles from "./SetupWizard.module.css";
 
 interface SetupWizardProps {
@@ -386,9 +387,121 @@ function SelectRewardsStep({
   );
 }
 
+// --- Join Family Step ---
+
+interface JoinFamilyStepProps {
+  onBack: () => void;
+}
+
+function JoinFamilyStep({ onBack }: JoinFamilyStepProps) {
+  const [code, setCode] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  const handleConnect = useCallback(async () => {
+    setStatus("loading");
+    setErrorMsg(null);
+
+    const client = getSupabaseClient();
+    if (!client) {
+      setErrorMsg(
+        "Supabase is not configured on this device. Make sure VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY are set in .env.local."
+      );
+      setStatus("error");
+      return;
+    }
+
+    try {
+      const { data, error: rpcError } = await client.rpc("redeem_sync_code", {
+        p_code: code.trim().toUpperCase(),
+      });
+
+      if (rpcError || !data || (data as { error?: string }).error) {
+        setErrorMsg(
+          "Invalid or expired code. Generate a fresh one from the original device: Parent Dashboard → System tab → Generate Sync Code."
+        );
+        setStatus("error");
+        return;
+      }
+
+      const tokens = data as { access_token: string; refresh_token: string };
+
+      const { error: sessionError } = await client.auth.setSession({
+        access_token: tokens.access_token,
+        refresh_token: tokens.refresh_token,
+      });
+
+      if (sessionError) {
+        setErrorMsg("Failed to establish session. Please try again.");
+        setStatus("error");
+        return;
+      }
+
+      // Session established — reload so GameContext re-initialises with the correct family ID.
+      window.location.reload();
+    } catch {
+      setErrorMsg("Something went wrong. Please try again.");
+      setStatus("error");
+    }
+  }, [code]);
+
+  return (
+    <div className={styles.step}>
+      <h2 role="heading" className={styles.stepHeading}>
+        Join Existing Family
+      </h2>
+      <p className={styles.stepSubheading}>
+        On the original device open{" "}
+        <strong>Parent Dashboard → System → Generate Sync Code</strong>, then
+        enter the 10-character code below.
+      </p>
+
+      {errorMsg !== null && (
+        <p className={styles.errorMessage} role="alert">
+          {errorMsg}
+        </p>
+      )}
+
+      <div className={styles.formGroup}>
+        <input
+          type="text"
+          className={styles.syncCodeInput}
+          value={code}
+          onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z2-9]/g, "").slice(0, 10))}
+          placeholder="ABCD EF234"
+          maxLength={10}
+          spellCheck={false}
+          autoComplete="off"
+          autoCapitalize="characters"
+          disabled={status === "loading"}
+        />
+      </div>
+
+      <button
+        aria-label="Connect to family"
+        className={styles.nextButton}
+        disabled={code.trim().length < 10 || status === "loading"}
+        onClick={() => {
+          void handleConnect();
+        }}
+      >
+        {status === "loading" ? "Connecting…" : "Connect to Family"}
+      </button>
+
+      <button
+        className={styles.backButton}
+        onClick={onBack}
+        disabled={status === "loading"}
+      >
+        Back
+      </button>
+    </div>
+  );
+}
+
 // --- SetupWizard root ---
 
-type WizardStep = "welcome" | "pin" | "choice" | "players" | "select-quests" | "select-rewards" | "done";
+type WizardStep = "welcome" | "join" | "pin" | "choice" | "players" | "select-quests" | "select-rewards" | "done";
 
 export function SetupWizard({ onComplete, onParentPortal }: SetupWizardProps): JSX.Element {
   const [step, setStep] = useState<WizardStep>("welcome");
@@ -492,7 +605,18 @@ export function SetupWizard({ onComplete, onParentPortal }: SetupWizardProps): J
           >
             Get Started
           </button>
+          <button
+            aria-label="Join existing family"
+            className={styles.joinButton}
+            onClick={() => setStep("join")}
+          >
+            Join existing family
+          </button>
         </div>
+      )}
+
+      {step === "join" && (
+        <JoinFamilyStep onBack={() => setStep("welcome")} />
       )}
 
       {step === "pin" && (

@@ -21,7 +21,7 @@ function renderParentDashboard(
   onExit = vi.fn()
 ) {
   return render(
-    <GameProvider initialState={state}>
+    <GameProvider skipSync={true} initialState={state}>
       <ParentDashboard onExit={onExit} />
     </GameProvider>
   );

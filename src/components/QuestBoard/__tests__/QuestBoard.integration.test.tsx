@@ -15,7 +15,7 @@ function renderBoard(
   onExit = vi.fn()
 ) {
   render(
-    <GameProvider initialState={state}>
+    <GameProvider skipSync={true} initialState={state}>
       <QuestBoard activePlayerId={activePlayerId} onPlayerSelect={onPlayerSelect} onExit={onExit} />
     </GameProvider>
   );

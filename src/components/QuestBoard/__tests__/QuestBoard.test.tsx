@@ -64,7 +64,7 @@ function renderBoard(
 ) {
   const s = state ?? makeState([makePlayer()], [makeQuest()]);
   render(
-    <GameProvider initialState={s}>
+    <GameProvider skipSync={true} initialState={s}>
       <QuestBoard activePlayerId={activePlayerId} onPlayerSelect={onPlayerSelect} onExit={onExit} />
     </GameProvider>
   );

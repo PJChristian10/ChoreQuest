@@ -6,7 +6,7 @@ import { SEED_STATE } from "../../../../../state/seed.js";
 
 function renderSystemTab() {
   return render(
-    <GameProvider initialState={SEED_STATE}>
+    <GameProvider skipSync={true} initialState={SEED_STATE}>
       <SystemTab />
     </GameProvider>
   );

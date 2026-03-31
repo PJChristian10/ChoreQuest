@@ -20,7 +20,7 @@ function renderRewardManagementTab(
   onSessionExpired = vi.fn()
 ) {
   return render(
-    <GameProvider initialState={state}>
+    <GameProvider skipSync={true} initialState={state}>
       <RewardManagementTab onSessionExpired={onSessionExpired} />
     </GameProvider>
   );

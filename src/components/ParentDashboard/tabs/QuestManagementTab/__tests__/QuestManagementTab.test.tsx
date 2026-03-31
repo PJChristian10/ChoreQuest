@@ -19,7 +19,7 @@ function renderQuestManagementTab(
   onSessionExpired = vi.fn()
 ) {
   return render(
-    <GameProvider initialState={state}>
+    <GameProvider skipSync={true} initialState={state}>
       <QuestManagementTab onSessionExpired={onSessionExpired} />
     </GameProvider>
   );

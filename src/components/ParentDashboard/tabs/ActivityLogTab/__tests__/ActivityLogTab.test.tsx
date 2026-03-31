@@ -17,7 +17,7 @@ afterEach(() => {
 
 function renderActivityLogTab(state = makeGameState()) {
   return render(
-    <GameProvider initialState={state}>
+    <GameProvider skipSync={true} initialState={state}>
       <ActivityLogTab />
     </GameProvider>
   );

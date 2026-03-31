@@ -23,18 +23,28 @@ export function SystemTab(): JSX.Element {
       setSyncCode("SUPABASE_NOT_CONFIGURED");
       return;
     }
-    const { data: { session } } = await client.auth.getSession();
+
+    // Prefer an existing session; if none, create an anonymous one.
+    let { data: { session } } = await client.auth.getSession();
     if (!session) {
-      setSyncCode("NO_SESSION");
+      const { data, error } = await client.auth.signInAnonymously();
+      if (error || !data.session) {
+        setSyncCode("NO_AUTH");
+        return;
+      }
+      session = data.session;
+    }
+
+    // Store the session tokens server-side and get back a short 10-char code.
+    const { data, error } = await client.rpc("create_sync_code", {
+      p_access_token: session.access_token,
+      p_refresh_token: session.refresh_token,
+    });
+    if (error || !data) {
+      setSyncCode("RPC_FAILED");
       return;
     }
-    // Encode the full session as base64 so it's copyable as one string.
-    // The receiving device calls supabase.auth.setSession({ access_token, refresh_token }).
-    const payload = JSON.stringify({
-      access_token: session.access_token,
-      refresh_token: session.refresh_token,
-    });
-    setSyncCode(btoa(payload));
+    setSyncCode(data as string);
     setSyncCodeCopied(false);
   };
 
@@ -173,14 +183,13 @@ export function SystemTab(): JSX.Element {
       <div className={styles.syncZone}>
         <h3 className={styles.syncHeading}>🔗 Link Another Device</h3>
         <p className={styles.syncDesc}>
-          To access ChoreQuest on a second device (e.g. your phone), generate a
-          sync code here and paste it into the app on the new device during
-          setup.
+          To access ChoreQuest on a second device, generate a sync code here,
+          then enter it on the new device: Setup Wizard → Join existing family.
         </p>
         <p className={styles.syncWarning}>
-          The code contains your session credentials — treat it like a password.
-          It is valid for one transfer; once the new device connects you will
-          need a fresh code for any additional devices.
+          Each code is 10 characters, valid for 10 minutes, and single-use.
+          Treat it like a password — anyone with the code gets full family
+          access.
         </p>
         <button
           aria-label="Generate sync code"
@@ -190,7 +199,10 @@ export function SystemTab(): JSX.Element {
           Generate Sync Code
         </button>
 
-        {syncCode !== null && syncCode !== "SUPABASE_NOT_CONFIGURED" && syncCode !== "NO_SESSION" && (
+        {syncCode !== null &&
+          syncCode !== "SUPABASE_NOT_CONFIGURED" &&
+          syncCode !== "NO_AUTH" &&
+          syncCode !== "RPC_FAILED" && (
           <div className={styles.syncCodeBox}>
             <p className={styles.syncCodeLabel}>Your sync code:</p>
             <code className={styles.syncCodeText}>{syncCode}</code>
@@ -209,9 +221,17 @@ export function SystemTab(): JSX.Element {
             VITE_SUPABASE_ANON_KEY to your .env.local file to enable sync.
           </p>
         )}
-        {syncCode === "NO_SESSION" && (
+        {syncCode === "NO_AUTH" && (
           <p role="alert" className={styles.syncError}>
-            No active session found. Reload the app and try again.
+            Could not sign in. Make sure Anonymous sign-ins are enabled in your
+            Supabase project: Authentication → Providers → Anonymous.
+          </p>
+        )}
+        {syncCode === "RPC_FAILED" && (
+          <p role="alert" className={styles.syncError}>
+            Sync code table not found. Run the SQL setup script in your Supabase
+            SQL editor (create sync_codes table + create_sync_code /
+            redeem_sync_code functions).
           </p>
         )}
       </div>
